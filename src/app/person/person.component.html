@@ -1,0 +1,9 @@
+<span>Name: </span>{{ person.getName() }}
+<br/>
+<span>Race: </span>{{ person.getRace() }}
+<app-string-input prop="name" [obj]="person"></app-string-input>
+
+<select>
+  <option *ngFor="let race of raceOptions" value="race.name">{{race.name}}</option>
+</select>
+<button>Select</button>

@@ -35,8 +35,28 @@ export class Person{
         switch(prop){
             case 'name':
                 return this.getName();
+            case 'race':
+                return this.getRace();
             default:
                 return this[prop];
         }
+    }
+
+    set(prop, value){
+        console.log("model: ", prop, value);
+        if(prop === 'name'){
+            this.name = value;
+        }
+        if(prop === 'race'){
+            this.race = value;
+        }
+        console.log(this);
+        return this;
+    }
+
+    getRaceOptions(){
+        return [
+            'Human', 'Elf', 'Dorff'
+        ]
     }
 }

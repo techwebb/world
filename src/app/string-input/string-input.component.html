@@ -1,4 +1,8 @@
 <p>
   <span (click)="mutate=!mutate" style="text-transform:capitalize;">{{prop}}: </span>
-  <span *ngIf="!mutate">{{ obj.get(prop) }}</span>
+  <span *ngIf="!mutate" (click)="mutate=!mutate">{{ obj.get(prop) }}</span>
+  
+  <input *ngIf="mutate" [value]="obj[prop] || ''" (input)="newVal = $event.target.value"/>
+  <button (click)="save()" *ngIf="mutate">&#x02713;</button>
+  <button (click)="cancel()" *ngIf="mutate">&#x02717;</button>
 </p>

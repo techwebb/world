@@ -1,7 +1,13 @@
-<span>Name: </span>{{ person.getName() }}
+<span>Name: </span>{{ person.get('name') }}<button (click)="setName()">yup</button>
+
 <br/>
-<span>Race: </span>{{ person.getRace() }}
-<app-string-input prop="name" [obj]="person"></app-string-input>
+<span>Hobby: </span>{{ person.get('hobby') }}
+<br/>
+<span>Race: </span>{{ person.get('race') }}
+<app-string-input prop="name" [(obj)]="person" (setPropRequest)="setPropRequest($event, 'name')"></app-string-input>
+<app-string-input prop="hobby" [(obj)]="person"></app-string-input>
+<app-choice-input prop="race" [(obj)]="person" [choices]="person.getRaceOptions()"></app-choice-input>
+
 
 <select>
   <option *ngFor="let race of raceOptions" value="race.name">{{race.name}}</option>

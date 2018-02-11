@@ -18,10 +18,19 @@ export class PersonComponent implements OnInit {
   ngOnInit() { 
     const location = new Location('Springfield');
     this.person = new Person();
+    //this.person.name = 'Tim';
     this.person.setLocation(location);
     this.raceOptions = location.raceDistribution();
   }
 
+  setPropRequest(value, prop){
+    console.log("parent: ",value, prop);
+    this.person.set(prop, value);
+  }
+
+  setName(){
+    this.person.set('name', 'Tim');
+  }
   
 
 }

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-string-input',
-  templateUrl: './string-input.component.html',
-  styleUrls: ['./string-input.component.css']
+  selector: 'app-input-string',
+  templateUrl: './input-string.component.html',
+  styleUrls: ['./input-string.component.css']
 })
-export class StringInputComponent implements OnInit {
+export class InputStringComponent implements OnInit {
   @Input() prop:string
   @Input() obj;
   mutate:boolean = false;

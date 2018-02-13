@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-choice-input',
-  templateUrl: './choice-input.component.html',
-  styleUrls: ['./choice-input.component.css']
+  selector: 'app-input-choice',
+  templateUrl: './input-choice.component.html',
+  styleUrls: ['./input-choice.component.css']
 })
-export class ChoiceInputComponent implements OnInit {
+export class InputChoiceComponent implements OnInit {
   @Input() prop:string;
   @Input() choices:string[];
   @Input() obj;

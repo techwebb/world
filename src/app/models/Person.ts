@@ -2,6 +2,7 @@ import {Calendar} from './Calendar';
 import {Location} from './Location';
 
 export class Person{
+    fields;
     name:string;
     birthdate:Calendar;
     location:Location;
@@ -9,7 +10,13 @@ export class Person{
     race:string;
     profession:string;
     
-    constructor(){ }
+    constructor(){ 
+        this.fields = [
+            {name:'name', type:'string'},
+            {name:'hobby', type:'string'},
+            {name:'race', type:'choice'}
+        ]
+    }
 
     setLocation(loc:Location):void{
         this.location = loc;

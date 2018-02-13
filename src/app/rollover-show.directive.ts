@@ -10,13 +10,11 @@ export class RolloverShowDirective {
   constructor(private el:ElementRef) { }
 
   @HostListener('mouseenter') onMouseEnter(){
-    console.log('enter');
     this.flag = true;
     this.flagChange.emit(true);
   }
 
   @HostListener('mouseleave') onMouseLeave(){
-    console.log('exit');
     this.flag = false;
     this.flagChange.emit(false);
   }

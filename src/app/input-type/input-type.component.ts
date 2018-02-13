@@ -37,6 +37,7 @@ export class InputTypeComponent implements OnInit, OnDestroy {
   }
 
   getComponentType(typeName:string){
+    console.log(typeName);
     return this.mappings[typeName];
   }
 
@@ -55,12 +56,12 @@ abstract class DynamicComponent{
 
 @Component({
   selector: 'dynamic-string',
-  template: `<app-input-string prop="prop" [(obj)]="obj" style="color:blue;"></app-input-string>`
+  template: `<app-input-string [prop]="prop" [(obj)]="obj" style="color:blue;"></app-input-string>`
 })
 export class DynamicStringComponent extends DynamicComponent{}
 
 @Component({
   selector: 'dynamic-choice',
-  template: `<div>hii</div>`
+  template: `<app-input-choice [prop]="prop" [(obj)]="obj" [choices]="obj.getRaceOptions()"></app-input-choice>`
 })
 export class DynamicChoiceComponent extends DynamicComponent{}

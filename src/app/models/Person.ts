@@ -51,11 +51,8 @@ export class Person{
 
     set(prop, value){
         console.log("model: ", prop, value);
-        if(prop === 'name'){
-            this.name = value;
-        }
-        if(prop === 'race'){
-            this.race = value;
+        if(['name', 'race','hobby'].includes(prop)){
+            this[prop] = value;
         }
         console.log(this);
         return this;

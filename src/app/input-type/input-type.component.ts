@@ -57,7 +57,7 @@ abstract class DynamicComponent{
 
 @Component({
   selector: 'dynamic-string',
-  template: `<app-input-string [prop]="prop" [(obj)]="obj" style="color:blue;"></app-input-string>`
+  template: `<app-input-string [prop]="prop" [(obj)]="obj"></app-input-string>`
 })
 export class DynamicStringComponent extends DynamicComponent{}
 
@@ -69,6 +69,6 @@ export class DynamicChoiceComponent extends DynamicComponent{}
 
 @Component({
   selector: 'dynamic-distribution',
-  template: `<app-input-distribution [(obj)]="obj"></app-input-distribution>`
+  template: `<app-input-distribution [prop]="prop" [(obj)]="obj" [mean]="obj.getChoices(prop).mean" [sd]="obj.getChoices(prop).sd"></app-input-distribution>`
 })
 export class DynamicDistributionComponent extends DynamicComponent{}

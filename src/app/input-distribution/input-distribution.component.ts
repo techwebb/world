@@ -7,15 +7,31 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class InputDistributionComponent implements OnInit {
   @Input() obj;
-  mean:number;
-  sd:number;
-  newVal:number;
+  @Input() prop;
+  @Input() mean:number;
+  @Input() sd:number;
+  mutate:boolean = false;
+  newVal;
+
   constructor() { }
 
   ngOnInit() {
-    this.mean = 130;
-    this.sd = 30;
-    this.newVal = 100;
+    this.newVal = this.obj[this.prop] || this.mean;
+  }
+
+  save(){
+    this.obj.set(this.prop, this.newVal);
+    this.mutate = false;
+  }
+
+  cancel(){
+    this.newVal = this.obj[this.prop] || '';
+    this.mutate = false;
+  }
+  
+  random(){
+    this.obj.setRandom(this.prop);
+    this.mutate = false;
   }
 
 }

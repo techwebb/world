@@ -1,12 +1,12 @@
 <p>
-    <span (click)="mutate=!mutate" style="text-transform:capitalize;">{{prop}}: </span>
-    <span *ngIf="!mutate" (click)="mutate=!mutate" style="text-transform:capitalize;">{{ obj.get(prop) }}</span>
-    
-    <select [value]="obj[prop]" (input)="newVal = $event.target.value" *ngIf="mutate">
-      <option *ngFor="let choice of choices">{{choice}}</option>
-    </select>
-    <button (click)="save()" *ngIf="mutate">&#x02713;</button>
-    <button (click)="cancel()" *ngIf="mutate">&#x02717;</button>
-    <button (click)="random()" *ngIf="mutate"> <small>&#x02A0D;(𝓍)</small></button>
-  </p>
+  <span (click)="mutate=!mutate" style="text-transform:capitalize;">{{prop}}: </span>
+  <span *ngIf="!mutate" (click)="mutate=!mutate" style="text-transform:capitalize;">{{ obj.get(prop) }}</span>
+  
+  <select [value]="obj[prop]" (input)="newVal = $event.target.value" *ngIf="mutate">
+    <option *ngFor="let choice of choices">{{choice}}</option>
+  </select>
+  <button (click)="save()" *ngIf="mutate">&#x02713;</button>
+  <button (click)="cancel()" *ngIf="mutate">&#x02717;</button>
+  <button (click)="random()" *ngIf="mutate"><small>&#x02A0D;(𝓍)</small></button>
+</p>
   

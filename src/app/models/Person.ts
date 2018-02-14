@@ -1,5 +1,8 @@
 import {Calendar} from './Calendar';
 import {Location} from './Location';
+import {Race} from './Race';
+import {Human} from './Human';
+import {Elf} from './Elf';
 
 export class Person{
     fields;
@@ -7,7 +10,7 @@ export class Person{
     birthdate:Calendar;
     location:Location;
     ageCategory:string;
-    race:string;
+    race:Race;
     profession:string;
     
     constructor(){ 
@@ -18,7 +21,7 @@ export class Person{
         ]
     }
 
-    setLocation(loc:Location):void{
+    setLocation(loc:Location){
         this.location = loc;
     };
 
@@ -33,34 +36,52 @@ export class Person{
         return desc + "NPC"; //'young human baker';
     }
 
-    getRace():string{
-        if(this.race) return this.race;
-        return "none";
-    }
-
     get(prop){
         switch(prop){
             case 'name':
                 return this.getName();
             case 'race':
-                return this.getRace();
+                return this.race && this.race.toString() || 'none';
             default:
                 return this[prop];
         }
     }
 
     set(prop, value){
-        console.log("model: ", prop, value);
-        if(['name', 'race','hobby'].includes(prop)){
-            this[prop] = value;
+        switch(prop){
+            case 'race':
+                this.setRace(value);
+            default:
+                this[prop] = value;
         }
-        console.log(this);
         return this;
     }
 
-    getRaceOptions(){
-        return [
-            'Human', 'Elf', 'Dorff'
-        ]
+    setRandom(prop){
+        switch(prop){
+            case 'race':
+                let choices = this.getChoices(prop);
+                this.setRace( choices[ Math.floor( Math.random()*choices.length ) ] );
+        }
+    }
+
+    getChoices(prop){
+        switch(prop){
+            case 'race':
+                return ['Human', 'Elf'];
+        }
+    }
+
+    setRace(choice){
+        console.log(choice);
+        switch(choice){
+            case'Human':
+                this.race = new Human();
+                break;
+            case 'Elf':
+                this.race = new Elf();
+                break;
+        }
+        
     }
 }

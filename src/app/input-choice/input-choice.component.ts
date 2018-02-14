@@ -27,4 +27,7 @@ export class InputChoiceComponent implements OnInit {
     this.newVal = this.obj[this.prop] || '';
     this.mutate = false;
   }
+  random(){
+    this.obj.setRandom(this.prop);
+  }
 }

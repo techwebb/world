@@ -18,7 +18,8 @@ export class InputTypeComponent implements OnInit, OnDestroy {
 
   private mappings = {
     'string': DynamicStringComponent,
-    'choice': DynamicChoiceComponent
+    'choice': DynamicChoiceComponent,
+    'distribution': DynamicDistributionComponent,
   }
 
   constructor(private componentFactoryResolver:ComponentFactoryResolver){
@@ -62,6 +63,12 @@ export class DynamicStringComponent extends DynamicComponent{}
 
 @Component({
   selector: 'dynamic-choice',
-  template: `<app-input-choice [prop]="prop" [(obj)]="obj" [choices]="obj.getRaceOptions()"></app-input-choice>`
+  template: `<app-input-choice [prop]="prop" [(obj)]="obj" [choices]="obj.getChoices(prop)"></app-input-choice>`
 })
 export class DynamicChoiceComponent extends DynamicComponent{}
+
+@Component({
+  selector: 'dynamic-distribution',
+  template: `<app-input-distribution [(obj)]="obj"></app-input-distribution>`
+})
+export class DynamicDistributionComponent extends DynamicComponent{}

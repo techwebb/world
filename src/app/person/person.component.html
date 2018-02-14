@@ -1,6 +1,9 @@
 {{person | json}}
-<button>
-    <small>&#x02A0D;(𝓍)</small>
-</button>
+
 
 <app-input-type *ngFor="let field of person.fields" [type]="field.type" [prop]="field.name" [(obj)]="person"></app-input-type>
+
+<div *ngIf="person.race">
+    
+  <app-input-type *ngFor="let field of person.race.fields" [type]="field.type" [prop]="field.name" [(obj)]="person.race"></app-input-type>
+</div>

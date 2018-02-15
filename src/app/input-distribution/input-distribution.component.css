@@ -1,10 +1,19 @@
 input[type=range] {
     height: 34px;
-    margin: 10px 0;
-    width: 100%;
+    width: 150px;
   }
   input[type=range]:focus {
     outline: none;
+  }
+  svg{
+    z-index:-1;
+    display:inline;
+    position:relative;
+    height:60px;
+    width:150px;
+    top:-9px;
+    left:158px;
+
   }
   /* input[type=range]::-webkit-slider-runnable-track {
     width: 100%;

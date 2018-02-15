@@ -24,10 +24,8 @@ export class Human extends Race{
         switch(prop){
             case 'gender':
                 return this.gender || 'none';
-                break;
             case 'height':
                 return this.height || 'none';
-                break;
         }
     }
 

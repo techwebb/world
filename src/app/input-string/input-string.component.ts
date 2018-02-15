@@ -14,6 +14,7 @@ export class InputStringComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.newVal = this.obj[this.prop] || '';
   }
 
   save(){

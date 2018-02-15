@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { PersonComponent } from './person/person.component';
@@ -29,6 +31,8 @@ import { InputDistributionComponent } from './input-distribution/input-distribut
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MaterialModule,
   ],
   entryComponents: [
     DynamicStringComponent,

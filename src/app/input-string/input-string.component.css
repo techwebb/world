@@ -1,0 +1,7 @@
+.inputRow{
+    display:flex;
+    flex-direction: row;
+}
+.example-container > *{
+    /* width: 100%; */
+}

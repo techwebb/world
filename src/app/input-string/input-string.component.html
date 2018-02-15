@@ -1,8 +1,19 @@
-<p [(appRolloverShow)]="mutate">
-  <span style="text-transform:capitalize;" >{{prop}}: </span>
-  <span *ngIf="!mutate" >{{ obj.get(prop) }}</span>
+<div class="inputRow">
+  <div [hidden]="mutate" (click)="mutate=true; theField.focus">
+      <span style="text-transform:capitalize;">{{prop}}: </span>
+      <span *ngIf="!mutate">{{ obj.get(prop) }}</span>
+  </div>
   
-  <input *ngIf="mutate" [value]="obj[prop] || ''" (input)="newVal = $event.target.value"/>
-  <button (click)="save()" *ngIf="mutate">&#x02713;</button>
-  <button (click)="cancel()" *ngIf="mutate">&#x02717;</button>
-</p>
+  <div [hidden]="!mutate">
+    <mat-form-field>
+      <input matInput [placeholder]="prop" [(ngModel)]="newVal" #theField>
+    </mat-form-field>
+    
+    <button mat-icon-button color="primary" (click)="save()">
+      <mat-icon aria-label="cancel">check circle</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" (click)="cancel()">
+        <mat-icon aria-label="cancel">clear</mat-icon>
+    </button>
+  </div>
+</div>

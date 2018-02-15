@@ -31,6 +31,7 @@ export class InputDistributionComponent implements OnInit {
   
   random(){
     this.obj.setRandom(this.prop);
+    this.newVal = this.obj[this.prop];
     this.mutate = false;
   }
 

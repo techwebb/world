@@ -1,9 +1,13 @@
 {{person | json}}
 
+<mat-card>
+  <mat-card-title>{{ person.getName() }}</mat-card-title>
+  <mat-card-content>
+    <app-input-type *ngFor="let field of person.fields" [type]="field.type" [prop]="field.name" [(obj)]="person"></app-input-type>
 
-<app-input-type *ngFor="let field of person.fields" [type]="field.type" [prop]="field.name" [(obj)]="person"></app-input-type>
-
-<div *ngIf="person.race">
-    
-  <app-input-type *ngFor="let field of person.race.fields" [type]="field.type" [prop]="field.name" [(obj)]="person.race"></app-input-type>
-</div>
+    <div *ngIf="person.race">
+        
+      <app-input-type *ngFor="let field of person.race.fields" [type]="field.type" [prop]="field.name" [(obj)]="person.race"></app-input-type>
+    </div>
+  </mat-card-content>
+</mat-card>

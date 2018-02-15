@@ -26,7 +26,7 @@ import { InputDistributionComponent } from './input-distribution/input-distribut
     DynamicChoiceComponent,
     DynamicStringComponent,
     DynamicDistributionComponent,
-    InputDistributionComponent
+    InputDistributionComponent,
   ],
   imports: [
     BrowserModule,

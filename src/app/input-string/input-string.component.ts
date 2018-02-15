@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Directive, Component, OnInit, Input, Output, Renderer, ElementRef,ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-input-string',
@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 export class InputStringComponent implements OnInit {
   @Input() prop:string
   @Input() obj;
+  @ViewChild('theField') theFieldRef:ElementRef;
   mutate:boolean = false;
   newVal:string;
 
@@ -25,5 +26,9 @@ export class InputStringComponent implements OnInit {
   cancel(){
     this.newVal = this.obj[this.prop] || '';
     this.mutate = false;
+  }
+  show(){
+    this.mutate = true;
+    //this.theFieldRef.nativeElement.focus();
   }
 }

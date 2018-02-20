@@ -15,7 +15,7 @@ export class PersonComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { 
+  ngOnInit(){
     const location = new Location('Springfield');
     this.person = new Person();
     //this.person.name = 'Tim';

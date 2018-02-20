@@ -8,7 +8,7 @@ import { Directive, Component, OnInit, Input, Output, Renderer, ElementRef,ViewC
 export class InputStringComponent implements OnInit {
   @Input() prop:string
   @Input() obj;
-  @ViewChild('theField') theFieldRef:ElementRef;
+  @ViewChild('theField', {read: ElementRef}) theField:ElementRef;
   mutate:boolean = false;
   newVal:string;
 
@@ -27,8 +27,11 @@ export class InputStringComponent implements OnInit {
     this.newVal = this.obj[this.prop] || '';
     this.mutate = false;
   }
+
   show(){
     this.mutate = true;
-    //this.theFieldRef.nativeElement.focus();
+    // setTimeout(this.theField.nativeElement.focus(), 10);
+    this.theField.nativeElement.focus();
+    //console.log(this.theField.nativeElement.outerHTML);
   }
 }

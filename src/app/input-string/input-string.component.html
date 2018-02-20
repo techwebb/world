@@ -1,16 +1,16 @@
 <div class="inputRow">
-  <div *ngIf="!mutate" (click)="show()">
+  <div [hidden]="mutate" (click)="show()">
       <span style="text-transform:capitalize;">{{prop}}: </span>
       <span>{{ obj.get(prop) }}</span>
   </div>
   
-  <div *ngIf="mutate">
+  <div [hidden]="!mutate">
     <mat-form-field>
-      <input matInput [placeholder]="prop" [(ngModel)]="newVal" #theField autofocus>
+      <input matInput [placeholder]="prop" [(ngModel)]="newVal" #theField>
     </mat-form-field>
     
     <button mat-icon-button color="primary" (click)="save()">
-      <mat-icon aria-label="cancel">check circle</mat-icon>
+      <mat-icon aria-label="cancel">done</mat-icon>
     </button>
     <button mat-icon-button color="primary" (click)="cancel()">
         <mat-icon aria-label="cancel">clear</mat-icon>

@@ -1,0 +1,4 @@
+.inputRow{
+    display:flex;
+    flex-direction: row;
+}

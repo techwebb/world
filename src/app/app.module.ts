@@ -29,10 +29,10 @@ import { InputDistributionComponent } from './input-distribution/input-distribut
     InputDistributionComponent,
   ],
   imports: [
-    BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    BrowserModule,
   ],
   entryComponents: [
     DynamicStringComponent,

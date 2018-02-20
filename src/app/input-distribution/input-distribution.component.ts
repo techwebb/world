@@ -19,6 +19,11 @@ export class InputDistributionComponent implements OnInit {
     this.newVal = this.obj[this.prop] || this.mean;
   }
 
+  show(){
+    this.mutate = true;
+    this.newVal = this.obj[this.prop] || this.mean;
+  }
+
   save(){
     this.obj.set(this.prop, this.newVal);
     this.mutate = false;

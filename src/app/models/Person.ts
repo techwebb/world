@@ -13,7 +13,7 @@ export class Person{
     race:Race;
     profession:string;
     
-    constructor(){ 
+    constructor(){
         this.fields = [
             {name:'name', type:'string'},
             {name:'hobby', type:'string'},
@@ -51,10 +51,10 @@ export class Person{
         switch(prop){
             case 'race':
                 this.setRace(value);
+                break;
             default:
                 this[prop] = value;
         }
-        return this;
     }
 
     setRandom(prop){
@@ -62,6 +62,7 @@ export class Person{
             case 'race':
                 let choices = this.getChoices(prop);
                 this.setRace( choices[ Math.floor( Math.random()*choices.length ) ] );
+                break;
         }
     }
 
@@ -75,13 +76,34 @@ export class Person{
     setRace(choice){
         console.log(choice);
         switch(choice){
-            case'Human':
+            case 'Human':
                 this.race = new Human();
                 break;
             case 'Elf':
                 this.race = new Elf();
                 break;
         }
+    }
+
+    compute(s){
+
+        let n = 1;
+        let d = 2;
+
+        let precision = s.toString.split('.')[1] || []).length;
+
+        while( Math.abs((n/d)-s) > 0.0000001 ){
+            if(n/d > s){
+                d++;
+            }
+            if(n/d < s){
+                n++;
+            }
+            if(n/d == s){
+                break;
+            }
+        }
         
+        return `${n}/${d}`;
     }
 }

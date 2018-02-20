@@ -1,4 +1,4 @@
-<p>
+<!-- <div>
   <span (click)="mutate=!mutate" style="text-transform:capitalize;">{{prop}}: </span>
   <span *ngIf="!mutate" (click)="mutate=!mutate" style="text-transform:capitalize;">{{ obj.get(prop) }}</span>
   
@@ -8,5 +8,29 @@
   <button (click)="save()" *ngIf="mutate">&#x02713;</button>
   <button (click)="cancel()" *ngIf="mutate">&#x02717;</button>
   <button (click)="random()" *ngIf="mutate"><small>&#x02A0D;(𝓍)</small></button>
-</p>
+</div>
+   -->
+
+<div class="inputRow">
+    <div [hidden]="mutate" (click)="show()">
+        <span style="text-transform:capitalize;">{{prop}}: </span>
+        <span>{{ obj.get(prop) }}</span>
+    </div>
+    
+    <div [hidden]="!mutate">
+      <mat-form-field>
+        <mat-select placeholder="{{prop}}" [(ngModel)]="newVal">
+          <mat-option *ngFor="let choice of choices" [value]="choice">{{choice}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <button mat-icon-button color="primary" (click)="save()">
+        <mat-icon aria-label="cancel">done</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="cancel()">
+          <mat-icon aria-label="cancel">clear</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" (click)="random()">&#x02A0D;(𝓍)</button>
+    </div>
+  </div>
   

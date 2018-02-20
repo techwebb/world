@@ -18,6 +18,11 @@ export class InputChoiceComponent implements OnInit {
     this.newVal = this.obj[this.prop] || '';
   }
 
+  show(){
+    this.mutate = true;
+    this.newVal = this.obj.get(this.prop) || '';
+  }
+
   save(){
     this.obj.set(this.prop, this.newVal);
     this.mutate = false;
@@ -27,6 +32,7 @@ export class InputChoiceComponent implements OnInit {
     this.newVal = this.obj[this.prop] || '';
     this.mutate = false;
   }
+
   random(){
     this.obj.setRandom(this.prop);
     this.mutate = false;

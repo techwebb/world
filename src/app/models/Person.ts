@@ -90,8 +90,6 @@ export class Person{
         let n = 1;
         let d = 2;
 
-        let precision = s.toString.split('.')[1] || []).length;
-
         while( Math.abs((n/d)-s) > 0.0000001 ){
             if(n/d > s){
                 d++;

@@ -1,0 +1,61 @@
+{
+    "Location": {
+        "name": "string",
+        "x": "number",
+        "y": "number",
+        "minorRadius": "number",
+        "majorRadius": "number",
+        "population": "population",
+        "government": "government"
+    },
+    "Population": {
+        "count": "number",
+        "raceDivision": {
+            "type": "division",
+            "item": "race"
+        },
+        "occupationDivision": {
+            "type": "division",
+            "item": "occupation"
+        },
+        "wealth": ["poor", "diminishing", "wealthy", "bountiful", "royalty", "agrarian"],
+        "technology": "string",
+        "type": ["village", "city", "metropolis", "city-state", "colony", "county", "duchy", "barony", "fief", "shire", "district", "kingdom", "empire", "fort", "outpost"]
+    },
+    "Government": {
+        "choices": ["royalty", "council", "military", "business", "guild", "republic", "democracy"],
+        "other": true,
+        "head": "person"
+    },
+    "Race": {
+        "name": "string",
+        "description": "string",
+        "genders": "choice",
+        "ageCap": "number",
+        "adultDivision": "number",
+        "history": "string",
+        "height": "distribution",
+        "weight": "distribution"
+    },
+    "Occupation": {
+        "name": "string",
+        "income": "currency",
+        "requirements": "string"
+    },
+    "Currency": {
+        "type": "currencyDenomination",
+        "count": "number"
+    },
+    "currencyDenomination": {
+        "name": "string",
+        "value": "number"
+    },
+    "Distribution": {
+        "mean": "number",
+        "standardDeviation": "number"
+    },
+    "Division": {
+        "item": "inherit",
+        "percent": "number"
+    }
+}

@@ -6,26 +6,23 @@
         "minorRadius": "number",
         "majorRadius": "number",
         "population": "population",
-        "government": "government"
+        "government": "government",
+        "connections[]": "connections"
     },
     "Population": {
         "count": "number",
-        "raceDivision": {
-            "type": "division",
-            "item": "race"
-        },
-        "occupationDivision": {
-            "type": "division",
-            "item": "occupation"
-        },
+        "raceDivision[]": "divisions by race",
+        "occupationDivision[]": "divisions by occupation",
         "wealth": ["poor", "diminishing", "wealthy", "bountiful", "royalty", "agrarian"],
         "technology": "string",
-        "type": ["village", "city", "metropolis", "city-state", "colony", "county", "duchy", "barony", "fief", "shire", "district", "kingdom", "empire", "fort", "outpost"]
+        "type": ["village", "city", "metropolis", "city-state", "colony", "county", "duchy", "barony", "fief", "shire", "district", "kingdom", "empire", "fort", "outpost"],        
+        "members[]": "person"
     },
     "Government": {
-        "choices": ["royalty", "council", "military", "business", "guild", "republic", "democracy"],
+        "type": ["royal", "council", "military", "business", "guild", "republic", "democracic"],
         "other": true,
-        "head": "person"
+        "head": "person",
+        "members[]": "person"
     },
     "Race": {
         "name": "string",
@@ -46,7 +43,7 @@
         "type": "currencyDenomination",
         "count": "number"
     },
-    "currencyDenomination": {
+    "CurrencyDenomination": {
         "name": "string",
         "value": "number"
     },
@@ -57,5 +54,13 @@
     "Division": {
         "item": "inherit",
         "percent": "number"
+    },
+    "Connection": {
+        "a": "Location",
+        "b": "Location",
+        "distance": "number",
+        "connectionDifficulty": "number",
+        "type": ["road", "sea", "air"],
+        "sortOrder": "number"
     }
 }

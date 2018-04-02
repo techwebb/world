@@ -1,5 +1,5 @@
-{
-    "Location": {
+var worldSettings = {
+    Location: {
         "name": "string",
         "x": "number",
         "y": "number",
@@ -63,4 +63,4 @@
         "type": ["road", "sea", "air"],
         "sortOrder": "number"
     }
-}
+};

@@ -9,32 +9,45 @@ String.prototype.type = 'string';
 Number.prototype.type = 'number';
 
 function classMaker(name){
-    return new Function(`return function ${name}(){}`)();
+    return new Function(`return function ${name}(){this.id = 1;}`)();
 }
 
 function giveProperty(obj, prop, propType){
     Object.defineProperty(obj, prop, {
         set(x){
-            if(x.type != propType) return false;
-            obj['_'+prop] = x;
+            if(x!= null && x.type != propType) return false;
+            return this['_'+prop] = x;
         },
-        get: () => obj['_'+prop]
+        get(){ return this['_'+prop] },
+        enumerable: true,
     });
+    obj[prop] = null;
+}
+function instaniate(obj){
+    var newObject = new obj;
+    newObject.prototype = obj;
+}
+function showProps(obj, objName) {
+    return Object.getOwnPropertyNames(obj).reduce( (carry,item) => carry + `${objName}.${item} = ${obj[item]}\n`, '' );
 }
 
 
-var temp = classMaker('CurrencyDenomination');
-giveProperty(temp, 'name', 'string');
+var CurrencyDenomination = classMaker('CurrencyDenomination');
+giveProperty(CurrencyDenomination.prototype, 'name', 'string');
+giveProperty(CurrencyDenomination.prototype, 'value', 'number');
 
+var labor = new CurrencyDenomination;
+//Object.setPrototypeOf(CurrencyDenomination, cdClass);
+//CurrencyDenomination.prototype = cdClass;
 
-var labor = new CurrencyDenominator();
-labor.name = 'labor';
-labor.value = 5;
+// var labor = new CurrencyDenomination;
+// labor.name = 'labor';
+// labor.value = 5;
 
-var talent = new CurrencyDenominator();
-talent.name = 'talent';
-talent.value = 40;
+// var talent = new CurrencyDenomination;
+// talent.name = 'talent';
+// talent.value = 40;
 
-var noble = new CurrencyDenominator();
-noble.name = 'noble';
-noble.value = 300;
+// var noble = new CurrencyDenomination;
+// noble.name = 'noble';
+// noble.value = 300;

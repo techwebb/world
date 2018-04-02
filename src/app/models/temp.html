@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <script type="text/javascript" src="./jason.js"></script>
+    <script type="text/javascript" src="./trials.js"></script> 
+
+    <script type="text/javascript">
+        console.log(Object.entries(worldSettings.Location));
+
+        function factory(categoryName, fields){
+            var fn = classMaker(categoryName);
+            Object.entries(fields).forEach( (entry) => giveProperty(fn.prototype, entry[0], entry[1]) );
+            return fn;
+        }
+
+        var thing = factory('Location', worldSettings.Location);
+        var town = new thing;
+        console.log('town', town);
+    </script>
+</body>
+</html>

@@ -1,8 +1,7 @@
 var worldSettings = {
-    Location: {
+    "Location": {
         "name": "string",
-        "x": "number",
-        "y": "number",
+        "coordinate": "coordinate",
         "minorRadius": "number",
         "majorRadius": "number",
         "population": "population",
@@ -62,5 +61,9 @@ var worldSettings = {
         "connectionDifficulty": "number",
         "type": ["road", "sea", "air"],
         "sortOrder": "number"
+    },
+    "Coordinate": {
+        "x": "number",
+        "y": "number"
     }
 };

@@ -1,24 +1,138 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+    body{
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size:0.85em;
+        letter-spacing:0.1em;
+    }
+    .graphNode{
+        width:250px;
+    }
+    .graphNode .head{
+        border:thin solid grey;
+        border-radius:9px 9px 0 0;
+        padding:3px 0 3px 15px;
+    }
+    .graphNode .location{
+        background-color:#25561e;
+        color:#fff;
+        font-weight:normal;
+    }
+    .graphNode .body{
+        border:thin solid grey;
+        border-top:none;
+        background-color:#828282;
+        border-radius:0 0 9px 9px;
+        padding:0 7px;
+    }
+    .graphNode input{
+        border-radius:8px;
+        border:none;
+        padding:2px;
+        padding-left:7px;
+        outline:none;
+    }
+    .graphNode .field{
+        padding:3px 0;
+    }
+    .btn{
+        padding: 1px 6px;
+        background-color:#cecece;
+        border-radius: 50%;
+        cursor: pointer;
+        line-height: 10px;
+        font-size: 15px;
+    }
+    .btn:hover{
+        background-color:#ddd;
+        box-shadow:0px 1px 5px rgba(0,0,0,0.5);
+    }
+    .units{
+        margin-left:4px;
+        color:#333;
+        font-size:smaller;
+    }
 
+</style>
 </head>
 <body>
+
+    <svg height="100" width="100">
+        <defs>
+            <pattern id="diagonalHatch" patternUnits="userSpaceOnUse" width="4" height="4">
+                <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" style="stroke:rgba(0,0,0,0.4); stroke-width:1" />
+            </pattern>
+            <clipPath id="winter">
+                <ellipse cx="50" cy="50" rx="50" ry="8.35" />
+                <path d="M0,50 a1,1 0 0,0 100,0" />
+            </clipPath>
+            <mask id="summer" x="0" y="0" width="100" height="100">
+                <circle cx="50" cy="50" r="50" width="100" height="100" fill="white" />
+                <ellipse cx="50" cy="50" rx="50" ry="8.35" fill="black"/>
+                <path d="M0,50 a1,1 0 0,0 100,0" fill="black"/>
+            </mask>
+        </defs>
+            
+        <circle cx="50" cy="50" r="50" stroke="black" stroke-width="0" fill="cyan" />
+        <rect width="100" height="100" fill="url(#diagonalHatch)" clip-path="url(#winter)" />
+        <!-- <rect width="100" height="100" fill="url(#diagonalHatch)" mask="url(#summer)" /> -->
+    </svg>
+    <button onclick="makeNew()">New Obj</button>
+    <div class="graphNode">
+        <div class="head location">
+            <span class="locationIcon">&dtrif;</span>
+            <span class="nodeType">Location</span>
+        </div>
+        <div class="body">
+            <div class="field">
+                <input type="text" placeholder="Name" />
+            </div>
+            <div class="field">
+                <span>(x,y)</span>
+                <span class="btn">&curren;</span>
+                <span class="btn">&utrif;</span>
+            </div>
+            <div class="field">
+                <label for="">City Limits</label>
+                <input type="text" placeholder="1.5" size="4"/><span class="units">miles</span>
+            </div>
+            <div class="field">
+                <label for="">Major Limits</label>
+                <input type="text" placeholder="12" size="4"/><span class="units">miles</span>
+            </div>
+            <div class="field">
+                <input type="text" placeholder="population" />
+            </div>
+            <div class="field">
+                <input type="text" placeholder="govenment" />
+            </div>
+            <div class="field">
+                Connections:
+            </div>
+        </div>
+    </div>
+
+
     <script type="text/javascript" src="./jason.js"></script>
     <script type="text/javascript" src="./trials.js"></script> 
 
     <script type="text/javascript">
-        console.log(Object.entries(worldSettings.Location));
+    function makeNew(){
 
-        function factory(categoryName, fields){
-            var fn = classMaker(categoryName);
-            Object.entries(fields).forEach( (entry) => giveProperty(fn.prototype, entry[0], entry[1]) );
-            return fn;
-        }
+    }
+    console.log(Object.entries(worldSettings.Location));
 
-        var thing = factory('Location', worldSettings.Location);
-        var town = new thing;
-        console.log('town', town);
+    function factory(categoryName, fields){
+        var fn = classMaker(categoryName);
+        Object.entries(fields).forEach( (entry) => giveProperty(fn.prototype, entry[0], entry[1]) );
+        return fn;
+    }
+
+    var thing = factory('Location', worldSettings.Location);
+    var town = new thing;
+    console.log('town', town);
     </script>
 </body>
 </html>

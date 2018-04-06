@@ -8,6 +8,7 @@ var worldSettings = {
         "government": "government",
         "connections[]": "connections"
     },
+    "RaceDivision": ["Divisions by race"] ,
     "Population": {
         "count": "number",
         "raceDivision[]": "divisions by race",
@@ -58,6 +59,7 @@ var worldSettings = {
         "a": "Location",
         "b": "Location",
         "distance": "number",
+        "direction": "string",
         "connectionDifficulty": "number",
         "type": ["road", "sea", "air"],
         "sortOrder": "number"

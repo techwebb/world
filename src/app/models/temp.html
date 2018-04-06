@@ -38,7 +38,7 @@
         padding:3px 0;
     }
     .btn{
-        padding: 1px 6px;
+        padding: 2px 5px;
         background-color:#cecece;
         border-radius: 50%;
         cursor: pointer;
@@ -53,6 +53,9 @@
         margin-left:4px;
         color:#333;
         font-size:smaller;
+    }
+    dl{
+        margin:0;
     }
 
 </style>
@@ -92,7 +95,7 @@
             <div class="field">
                 <span>(x,y)</span>
                 <span class="btn">&curren;</span>
-                <span class="btn">&utrif;</span>
+                <span class="btn">&hercon;</span>
             </div>
             <div class="field">
                 <label for="">City Limits</label>
@@ -102,14 +105,75 @@
                 <label for="">Major Limits</label>
                 <input type="text" placeholder="12" size="4"/><span class="units">miles</span>
             </div>
+            <hr />
             <div class="field">
                 <input type="text" placeholder="population" />
             </div>
             <div class="field">
-                <input type="text" placeholder="govenment" />
+                <dl>
+                    <dt>Races</dt>
+                    <dd><input type="text" value="Human" size="10"/>: <input type="text" value="100" size="4"/></dd>
+                    <dd><input type="text" value="Elf" size="10"/>: <input type="text" value="100" size="4"/></dd>
+                </dl>
             </div>
             <div class="field">
+                <dl>
+                    <dt>Occupations</dt>
+                    <dd><input type="text" value="Farmer" size="10"/>: <input type="text" value="100" size="4"/></dd>
+                    <dd><input type="text" value="Brewer" size="10"/>: <input type="text" value="3" size="4"/></dd>
+                    <dd><input type="text" value="Guards" size="10"/>: <input type="text" value="6" size="4"/></dd>
+                    <dd><input type="text" value="Craftsmen" size="10"/>: <input type="text" value="10" size="4"/></dd>
+                    <dd><input type="text" value="Nobles" size="10"/>: <input type="text" value="10" size="4"/></dd>
+                </dl>
+            </div>
+            <div class="field">
+                Wealth
+                <select>
+                    <option></option>
+                    <option>poor</option>
+                    <option>diminishing</option>
+                    <option>wealthy</option>
+                    <option>bountiful</option>
+                    <option>royalty</option>
+                    <option>agrarian</option>
+                </select>
+            </div>
+            <div class="field">
+                Type
+                <select>
+                    <option></option>
+                    <option>village</option>
+                    <option>city</option>
+                    <option>metropolis</option>
+                    <option>city-state</option>
+                    <option>colony</option>
+                    <option>county</option>
+                    <option>duchy</option>
+                    <option>barony</option>
+                    <option>fief</option>
+                    <option>shire</option>
+                    <option>district</option>
+                    <option>kingdom</option>
+                    <option>empire</option>
+                    <option>fort</option>
+                    <option>outpost</option>
+                </select>
+            </div>
+            <div class="field">
+                Tech
+                <select>
+                    <option></option>
+                    <option>stone</option>
+                    <option>bronze</option>
+                    <option>iron</option>
+                    <option>steel</option>
+                    <option>industrial</option>
+                </select>
+            </div>
+            <hr />
+            <div class="field">
                 Connections:
+                <span class="btn">&plus;</span>
             </div>
         </div>
     </div>

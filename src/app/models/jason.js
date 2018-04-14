@@ -1,6 +1,7 @@
 var worldSettings = {
   "Location": {
     "name": "string",
+    "parent": "Location",
     "coordinate": "coordinate",
     "minorRadius": "number",
     "majorRadius": "number",

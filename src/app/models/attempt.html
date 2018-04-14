@@ -62,104 +62,96 @@
     </style>
 </head>
 <body>
-  <div id="app">{{message}}</div>
   <div class="graphNode" id="location1">
-      <div class="head location">
-          <span class="locationIcon">&commat;</span>
-          <span class="nodeType">Location</span>
+    <div class="head location">
+      <span class="locationIcon">&commat;</span>
+      <span class="nodeType">Location</span>
+    </div>
+    <div class="body">
+      {{minorRadius}}{{majorRadius}}
+      {{coordinate}}
+      <graph-string field="Name"  v-model="name"></graph-string>
+      <graph-coordinate v-bind="coordinate"></graph-coordinate>
+      <graph-decimal field="City Limits" unit="miles" v-model="minorRadius"></graph-decimal>
+      <graph-decimal field="Major Limits" unit="miles" v-model="majorRadius"></graph-decimal>
+      <hr />
+      <div class="field">
+          <input type="text" placeholder="population" />
       </div>
-      <div class="body">
-          <div class="field">
-              <input type="text" placeholder="Name" v-model="name"/>
-          </div>
-          <graph-coordinate v-bind:coord="coordinate"></graph-coordinate>
-          <graph-decimal field="City Limits" unit="miles" v-bind:value="minorRadius"></graph-decimal>
-          <div class="field">
-              <label for="">City Limits</label>
-              <input type="text" placeholder="1.5" size="4"/><span class="units">miles</span>
-          </div>
-          <div class="field">
-              <label for="">Major Limits</label>
-              <input type="text" placeholder="12" size="4"/><span class="units">miles</span>
-          </div>
-          <hr />
-          <div class="field">
-              <input type="text" placeholder="population" />
-          </div>
-          <div class="field">
-              <dl>
-                  <dt>Races</dt>
-                  <dd><input type="text" value="Human" size="10"/>: <input type="text" value="100" size="4"/></dd>
-                  <dd><input type="text" value="Elf" size="10"/>: <input type="text" value="100" size="4"/></dd>
-              </dl>
-          </div>
-          <div class="field">
-              <dl>
-                  <dt>Occupations</dt>
-                  <dd><input type="text" value="Farmer" size="10"/>: <input type="text" value="100" size="4"/></dd>
-                  <dd><input type="text" value="Brewer" size="10"/>: <input type="text" value="3" size="4"/></dd>
-                  <dd><input type="text" value="Guards" size="10"/>: <input type="text" value="6" size="4"/></dd>
-                  <dd><input type="text" value="Craftsmen" size="10"/>: <input type="text" value="10" size="4"/></dd>
-                  <dd><input type="text" value="Nobles" size="10"/>: <input type="text" value="10" size="4"/></dd>
-              </dl>
-          </div>
-          <div class="field">
-              Wealth
-              <select>
-                  <option></option>
-                  <option>poor</option>
-                  <option>diminishing</option>
-                  <option>wealthy</option>
-                  <option>bountiful</option>
-                  <option>royalty</option>
-                  <option>agrarian</option>
-              </select>
-          </div>
-          <div class="field">
-              Type
-              <select>
-                  <option></option>
-                  <option>village</option>
-                  <option>city</option>
-                  <option>metropolis</option>
-                  <option>city-state</option>
-                  <option>colony</option>
-                  <option>county</option>
-                  <option>duchy</option>
-                  <option>barony</option>
-                  <option>fief</option>
-                  <option>shire</option>
-                  <option>district</option>
-                  <option>kingdom</option>
-                  <option>empire</option>
-                  <option>fort</option>
-                  <option>outpost</option>
-              </select>
-          </div>
-          <div class="field">
-              Tech
-              <select>
-                  <option></option>
-                  <option>stone</option>
-                  <option>bronze</option>
-                  <option>iron</option>
-                  <option>steel</option>
-                  <option>industrial</option>
-              </select>
-          </div>
-          <hr />
-          <div class="field">
-              Connections:
-              <span class="btn">&plus;</span>
-          </div>
+      <div class="field">
+          <dl>
+              <dt>Races</dt>
+              <dd><input type="text" value="Human" size="10"/>: <input type="text" value="100" size="4"/></dd>
+              <dd><input type="text" value="Elf" size="10"/>: <input type="text" value="100" size="4"/></dd>
+          </dl>
       </div>
+      <div class="field">
+          <dl>
+              <dt>Occupations</dt>
+              <dd><input type="text" value="Farmer" size="10"/>: <input type="text" value="100" size="4"/></dd>
+              <dd><input type="text" value="Brewer" size="10"/>: <input type="text" value="3" size="4"/></dd>
+              <dd><input type="text" value="Guards" size="10"/>: <input type="text" value="6" size="4"/></dd>
+              <dd><input type="text" value="Craftsmen" size="10"/>: <input type="text" value="10" size="4"/></dd>
+              <dd><input type="text" value="Nobles" size="10"/>: <input type="text" value="10" size="4"/></dd>
+          </dl>
+      </div>
+      <div class="field">
+          Wealth
+          <select>
+              <option></option>
+              <option>poor</option>
+              <option>diminishing</option>
+              <option>wealthy</option>
+              <option>bountiful</option>
+              <option>royalty</option>
+              <option>agrarian</option>
+          </select>
+      </div>
+      <div class="field">
+          Type
+          <select>
+              <option></option>
+              <option>village</option>
+              <option>city</option>
+              <option>metropolis</option>
+              <option>city-state</option>
+              <option>colony</option>
+              <option>county</option>
+              <option>duchy</option>
+              <option>barony</option>
+              <option>fief</option>
+              <option>shire</option>
+              <option>district</option>
+              <option>kingdom</option>
+              <option>empire</option>
+              <option>fort</option>
+              <option>outpost</option>
+          </select>
+      </div>
+      <div class="field">
+          Tech
+          <select>
+              <option></option>
+              <option>stone</option>
+              <option>bronze</option>
+              <option>iron</option>
+              <option>steel</option>
+              <option>industrial</option>
+          </select>
+      </div>
+      <hr />
+      <div class="field">
+          Connections:
+          <span class="btn">&plus;</span>
+      </div>
+    </div>
   </div>
   <script>
     var coord1 = {x:15, y:56};
     var location1 = {
       name: '',
       coordinate: coord1,
-      minorRadius: '',
+      minorRadius: 1.2,
       majorRadius: '',
       population: '',
       government: {},
@@ -177,25 +169,57 @@
 
     
     Vue.component('graph-coordinate', {
-      props: ['coord'],
+      props: ['x', 'y'],
       template: `<div class="field">
-          <span>({{ coord.x }},{{ coord.y }})</span>
+          <span>({{ x }},{{ y }})</span>
           <span class="btn">pick</span>
-          <span class="btn" v-if="coord">show</span>
+          <span class="btn" v-if="x">show</span>
         </div>`
     });
+    Vue.component('graph-string', {
+      props: ['field', 'value'],
+      template: `<div class="field">
+          <input 
+            type="text" 
+            :placeholder="field" 
+            v-bind:value="value"
+            v-on:input="$emit('input', $event.target.value)"
+          />
+        </div>`,
+        methods: {
+          updateMe: function(value){
+            this.$emit('input', value);
+          }
+        }
+    });
     Vue.component('graph-decimal', {
-      props: ['field', 'value', 'units'],
-      data: () => {initial:0.0},
+      props: ['field', 'value', 'unit'],
       template: `<div class="field">
           <label for="">{{ field }}</label>
-          <input type="text" placeholder="initial" size="4" v:model="value"/><span class="units">{{ units }}</span>
-        </div>`
+          <input 
+            type="text" 
+            placeholder="0.0" 
+            size="4" 
+            v-bind:value="value"
+            v-on:input="$emit('input', $event.target.value)"
+          />
+          <span class="units">{{ unit }}</span>
+        </div>`,
+        methods: {
+          updateMe: function(value){
+            this.$emit('input', value);
+          }
+        }
     });
 
     var app = new Vue({
       el: '#location1',
-      data: location1
+      data: location1,
+      computed: {
+        obj: function(){
+          JSON.stringify(this.location1)
+        }
+      }
     });
     
   </script>

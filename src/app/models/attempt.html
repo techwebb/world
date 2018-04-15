@@ -188,7 +188,7 @@
       <graph-decimal v-model="self.majorRadius" field="Major Limits" unit="miles" ></graph-decimal>
       <graph-choice v-model="self.population.type" field="Type" :options="choices.locationTypes"></graph-choice>
       <graph-log-range v-model="self.size" field="Size"  min="1e2" max="1e7"></graph-log-range>
-      <graph-division :rows="self.raceDivision" field="Races" name="race" count="count" @listen="self.reaceDivision"></graph-division>
+      <graph-division :rows="self.raceDivision" field="Races" name="race" count="count"></graph-division>
       <hr />
       <div class="field">
         <input type="text" placeholder="population" />
@@ -387,16 +387,15 @@
       template: `<div class="field">
           <dl>
             <dt>{{field}}</dt>
-            <dd v-for="(row, $i) in rows">
-              <input type="text" :value="row[name]" @input="updateMe($i, name, $event.target.value)" size="10" />:
-              <input type="text" :value="row['count']" @input="updateMe($i, 'count', $event.target.value)" size="4" />
+            <dd v-for="(row, i) in rows">
+              <input type="text" :value="row[name]" @input="updateMe(i, name, $event.target.value)" size="10" />:
+              <input type="text" :value="row[count]" @input="updateMe(i, count, $event.target.value)" size="4" />
             </dd>
           </dl>
         </div>`,
         methods: {
           updateMe: function(i,col,val){
             this.rows[i][col] = val;
-            this.$emit('input', i)
           }
         }
     })

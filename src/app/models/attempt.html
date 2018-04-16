@@ -18,7 +18,7 @@
     .graphNode .head {
       border: thin solid grey;
       border-radius: 9px 9px 0 0;
-      padding: 3px 0 3px 15px;
+      padding: 3px 5px 3px 15px;
     }
 
     .graphNode .location {
@@ -56,7 +56,7 @@
       content: '';
       position: absolute;
       left: 0px;
-      top: 10%;
+      top: 5px;
       height: 80%;
       border-left: 6px solid #25561e
     }
@@ -87,6 +87,10 @@
 
     dl {
       margin: 0;
+    }
+
+    .pull-right{
+      float:right;
     }
   </style>
   <style>
@@ -180,11 +184,11 @@
 
 <body>
   <div id="worldApp">
-      <location-node :self="locations[0]" :choices="choices"></location-node>
+      <location-node :self="locations[0]" :prefs="prefs"></location-node>
   </div>
   <script>
     var location1 = {
-      name: '',
+      name: 'Schweidelbach',
       coordinate: { x: 15, y: 56 },
       minorRadius: 1.2,
       majorRadius: '',
@@ -204,21 +208,22 @@
       ],
       wealth: '',
       technology: '',
-      type: '',
+      type: 'Villiage',
       members: [],
       connections: []
     };
 
-    var choices = {
+    var prefs = {
       locationTypes: ['Villiage', 'City', 'Metropolis', 'City-State', 'Colony', 'County', 'Duchy', 'Barony', 'Fief', 'Shire', 'District', 'Kingdom', 'Empire', 'Fort', 'Outpost'],
       wealthTypes: ['Poor', 'Diminishining', 'Wealthy', 'Bountiful', 'Royalty', 'Agrarian'],
       technologyTypes: ['Stone', 'Bronze', 'Iron', 'Steel', 'Industrial'],
-      size: {min:1e2, max:1e7}
+      size: {min:1e2, max:1e7},
+      minifiedView: ['name', 'type', 'coordinate', 'connections']
     };
 
     var locations = [ location1 ];
 
-    Vue.component('graph-coordinate', {
+    var coordinateCom = Vue.component('graph-coordinate', {
       props: ['x', 'y'],
       template: `<div class="field">
           <span>({{ x }},{{ y }})</span>
@@ -226,7 +231,7 @@
           <span class="btn" v-if="x">show</span>
         </div>`
     });
-    Vue.component('graph-string', {
+    var stringCom = Vue.component('graph-string', {
       props: ['field', 'value'],
       template: `<div class="field">
           <input 
@@ -237,7 +242,7 @@
           />
         </div>`
     });
-    Vue.component('graph-decimal', {
+    var decimalCom = Vue.component('graph-decimal', {
       props: ['field', 'value', 'unit'],
       template: `<div class="field">
           <label for="">{{ field }}</label>
@@ -251,7 +256,7 @@
           <span class="units">{{ unit }}</span>
         </div>`
     });
-    Vue.component('graph-choice', {
+    var choiceCom = Vue.component('graph-choice', {
       props: ['field', 'value', 'options'],
       template: `<div class="field">
         {{field}}
@@ -261,7 +266,7 @@
         </select>
       </div>`
     });
-    Vue.component('graph-log-range', {
+    var rangeCom = Vue.component('graph-log-range', {
       props: ['field', 'min', 'max', 'value'],
       data: function(){
         return {
@@ -291,7 +296,7 @@
         }
       }
     });
-    Vue.component('graph-division', {
+    var divisionCom = Vue.component('graph-division', {
       props: ['rows', 'field', 'name', 'count'],
       data: function(){
         return {
@@ -308,61 +313,72 @@
             </dd>
           </dl>
         </div>`,
-        methods: {
-          updateMe: function(i,col,val){
-            this.rows[i][col] = val;
-          },
-          addOneMore: function(){
-            var obj = {count:0};
-            obj[name] = '';
-            this.rows.push(obj);
-          },
-          deleteMe: function(i){
-            if(this.rowToDelete != i){
-              this.rowToDelete = i;
-              setTimeout(() => {
-                this.rowToDelete = null;
-              }, 2000);
-            }else{
+      methods: {
+        updateMe: function(i,col,val){
+          this.rows[i][col] = val;
+        },
+        addOneMore: function(){
+          var obj = {count:0};
+          obj[name] = '';
+          this.rows.push(obj);
+        },
+        deleteMe: function(i){
+          if(this.rowToDelete != i){
+            this.rowToDelete = i;
+            setTimeout(() => {
               this.rowToDelete = null;
-              this.rows.splice(i, 1);
-            }
+            }, 2000);
+          }else{
+            this.rowToDelete = null;
+            this.rows.splice(i, 1);
           }
         }
+      }
     });
 
-    Vue.component('location-node', {
-      props: ['self', 'choices'],
+    var locationCom = Vue.component('location-node', {
+      props: ['self', 'prefs'],
+      data() {
+        return { minified:false };
+      },
       template: `<div class="graphNode">
         <div class="head location">
           <span class="locationIcon">&commat;</span>
           <span class="nodeType">Location</span>
+          <span class="pull-right" v-show="minified" @click="minified = false">&dtrif;</span>
+          <span class="pull-right" v-show="!minified" @click="minified = true">&utri;</span>
         </div>
         <div class="body">
-          <graph-string field="Name" v-model="self.name"></graph-string>
-          <graph-coordinate v-bind="self.coordinate"></graph-coordinate>
-          <graph-decimal v-model="self.minorRadius" field="City Limits" unit="miles" ></graph-decimal>
-          <graph-decimal v-model="self.majorRadius" field="Major Limits" unit="miles" ></graph-decimal>
+          <graph-string field="Name" v-model="self.name" v-show="doesItShow('name')"></graph-string>
+          <graph-coordinate v-bind="self.coordinate" v-show="doesItShow('coordinate')"></graph-coordinate>
+          <graph-decimal v-model="self.minorRadius" field="City Limits" unit="miles" v-show="doesItShow('minorRadius')"></graph-decimal>
+          <graph-decimal v-model="self.majorRadius" field="Major Limits" unit="miles" v-show="doesItShow('majorRadius')"></graph-decimal>
           <hr/>
-          <graph-choice v-model="self.type" field="Type" :options="choices.locationTypes"></graph-choice>
-          <graph-choice v-model="self.wealth" field="Wealth" :options="choices.wealthTypes"></graph-choice>
-          <graph-choice v-model="self.technology" field="Tech Level" :options="choices.technologyTypes"></graph-choice>
-          <graph-log-range v-model="self.size" field="Size"  :min="choices.size.min" :max="choices.size.max"></graph-log-range>
-          <graph-division :rows="self.raceDivision" field="Races" name="race" count="count"></graph-division>
-          <graph-division :rows="self.occupationDivision" field="Occupations" name="occupation" count="count"></graph-division>
+          <graph-choice v-model="self.type" field="Type" :options="prefs.locationTypes" v-show="doesItShow('type')"></graph-choice>
+          <graph-choice v-model="self.wealth" field="Wealth" :options="prefs.wealthTypes" v-show="doesItShow('wealth')"></graph-choice>
+          <graph-choice v-model="self.technology" field="Tech Level" :options="prefs.technologyTypes" v-show="doesItShow('technology')"></graph-choice>
+          <graph-log-range v-model="self.size" field="Size"  :min="prefs.size.min" :max="prefs.size.max" v-show="doesItShow('size')"></graph-log-range>
+          <graph-division :rows="self.raceDivision" field="Races" name="race" count="count" v-show="doesItShow('raceDivision')"></graph-division>
+          <graph-division :rows="self.occupationDivision" field="Occupations" name="occupation" count="count" v-show="doesItShow('occupationDivision')"></graph-division>
           <hr />
-          <div class="field">
+          <div class="field" v-show="doesItShow('connections')">
             Connections:
             <span class="btn">&plus;</span>
           </div>
         </div>
       </div>`,
+      methods: {
+        doesItShow: function(field){
+          return !this.minified || this.prefs.minifiedView.includes(field);
+        }
+      }
     });
+
     var app = new Vue({
       el: '#worldApp',
       data: { 
         locations,
-        choices 
+        prefs 
       },
       computed: {
         obj: function () {

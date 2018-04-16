@@ -42,6 +42,11 @@
       padding-left: 7px;
       outline: none;
     }
+    .graphNode textarea{
+      width: 90%;
+      min-height: 4em;
+      border-radius: 12px;
+    }
 
     .graphNode select{
       border-radius: 12px;
@@ -192,6 +197,7 @@
       coordinate: { x: 15, y: 56 },
       minorRadius: 1.2,
       majorRadius: '',
+      description: '',
       population: '',
       government: {},
       size: 1500,
@@ -240,6 +246,15 @@
             :value="value"
             @input="$emit('input', $event.target.value)"
           />
+        </div>`
+    });
+    var paragraphCom = Vue.component('graph-paragraph', {
+      props: ['field', 'paragraph'],
+      template: `<div class="field">
+          <textarea :placeholder="field"
+            :value="paragraph"
+            @input="$emit('input', $event.target.value)">
+          </textarea>
         </div>`
     });
     var decimalCom = Vue.component('graph-decimal', {
@@ -353,6 +368,7 @@
           <graph-coordinate v-bind="self.coordinate" v-show="doesItShow('coordinate')"></graph-coordinate>
           <graph-decimal v-model="self.minorRadius" field="City Limits" unit="miles" v-show="doesItShow('minorRadius')"></graph-decimal>
           <graph-decimal v-model="self.majorRadius" field="Major Limits" unit="miles" v-show="doesItShow('majorRadius')"></graph-decimal>
+          <graph-paragraph v-model="self.description" field="Description" vshow="doesitShow('description')"></graph-paragraph>
           <hr/>
           <graph-choice v-model="self.type" field="Type" :options="prefs.locationTypes" v-show="doesItShow('type')"></graph-choice>
           <graph-choice v-model="self.wealth" field="Wealth" :options="prefs.wealthTypes" v-show="doesItShow('wealth')"></graph-choice>

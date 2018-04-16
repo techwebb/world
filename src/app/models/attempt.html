@@ -49,7 +49,7 @@
     }
 
     .graphNode .field {
-      padding: 3px 7px;
+      padding: 3px 0px 3px 7px;
       position: relative;
     }
     .field:after {
@@ -68,11 +68,15 @@
       cursor: pointer;
       line-height: 10px;
       font-size: 9px;
+      outline: none;
     }
 
     .btn:hover {
       background-color: #ddd;
       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+    }
+    .btn.danger{
+      background-color: #b44;
     }
 
     .units {
@@ -175,118 +179,13 @@
 </head>
 
 <body>
-  <div class="graphNode" id="location1">
-    <div class="head location">
-      <span class="locationIcon">&commat;</span>
-      <span class="nodeType">Location</span>
-    </div>
-    <div class="body">
-      {{ self.raceDivision }}
-      <graph-string field="Name" v-model="self.name"></graph-string>
-      <graph-coordinate v-bind="self.coordinate"></graph-coordinate>
-      <graph-decimal v-model="self.minorRadius" field="City Limits" unit="miles" ></graph-decimal>
-      <graph-decimal v-model="self.majorRadius" field="Major Limits" unit="miles" ></graph-decimal>
-      <graph-choice v-model="self.population.type" field="Type" :options="choices.locationTypes"></graph-choice>
-      <graph-log-range v-model="self.size" field="Size"  min="1e2" max="1e7"></graph-log-range>
-      <graph-division :rows="self.raceDivision" field="Races" name="race" count="count"></graph-division>
-      <hr />
-      <div class="field">
-        <input type="text" placeholder="population" />
-      </div>
-      <div class="field">
-        <dl>
-          <dt>Races</dt>
-          <dd>
-            <input type="text" value="Human" size="10" />:
-            <input type="text" value="100" size="4" />
-          </dd>
-          <dd>
-            <input type="text" value="Elf" size="10" />:
-            <input type="text" value="100" size="4" />
-          </dd>
-        </dl>
-      </div>
-      <div class="field">
-        <dl>
-          <dt>Occupations</dt>
-          <dd>
-            <input type="text" value="Farmer" size="10" />:
-            <input type="text" value="100" size="4" />
-          </dd>
-          <dd>
-            <input type="text" value="Brewer" size="10" />:
-            <input type="text" value="3" size="4" />
-          </dd>
-          <dd>
-            <input type="text" value="Guards" size="10" />:
-            <input type="text" value="6" size="4" />
-          </dd>
-          <dd>
-            <input type="text" value="Craftsmen" size="10" />:
-            <input type="text" value="10" size="4" />
-          </dd>
-          <dd>
-            <input type="text" value="Nobles" size="10" />:
-            <input type="text" value="10" size="4" />
-          </dd>
-        </dl>
-      </div>
-      <div class="field">
-        Wealth
-        <select>
-          <option></option>
-          <option>poor</option>
-          <option>diminishing</option>
-          <option>wealthy</option>
-          <option>bountiful</option>
-          <option>royalty</option>
-          <option>agrarian</option>
-        </select>
-      </div>
-      <div class="field">
-        Type
-        <select>
-          <option></option>
-          <option>village</option>
-          <option>city</option>
-          <option>metropolis</option>
-          <option>city-state</option>
-          <option>colony</option>
-          <option>county</option>
-          <option>duchy</option>
-          <option>barony</option>
-          <option>fief</option>
-          <option>shire</option>
-          <option>district</option>
-          <option>kingdom</option>
-          <option>empire</option>
-          <option>fort</option>
-          <option>outpost</option>
-        </select>
-      </div>
-      <div class="field">
-        Tech
-        <select>
-          <option></option>
-          <option>stone</option>
-          <option>bronze</option>
-          <option>iron</option>
-          <option>steel</option>
-          <option>industrial</option>
-        </select>
-      </div>
-      <hr />
-      <div class="field">
-        Connections:
-        <span class="btn">&plus;</span>
-      </div>
-    </div>
+  <div id="worldApp">
+      <location-node :self="locations[0]" :choices="choices"></location-node>
   </div>
   <script>
-    var coord1 = { x: 15, y: 56 };
     var location1 = {
       name: '',
-      coordinate: coord1,
+      coordinate: { x: 15, y: 56 },
       minorRadius: 1.2,
       majorRadius: '',
       population: '',
@@ -296,18 +195,28 @@
         {race:'Human', count:50},
         {race:'Orc', count:20}
       ],
-      occupationDivision: [],
+      occupationDivision: [
+        {occupation:'Farmer', count:100},
+        {occupation:'Brewer', count:3},
+        {occupation:'Guards', count:6},
+        {occupation:'Crafting', count:10},
+        {occupation:'Nobles', count:10},
+      ],
       wealth: '',
       technology: '',
       type: '',
       members: [],
       connections: []
     };
-    var locationTypes = ['Villiage', 'City', 'Metropolis', 'City-State', 'Colony', 'County', 'Duchy', 'Barony', 'Fief', 'Shire', 'District', 'Kingdom', 'Empire', 'Fort', 'Outpost'];
 
     var choices = {
-      locationTypes
+      locationTypes: ['Villiage', 'City', 'Metropolis', 'City-State', 'Colony', 'County', 'Duchy', 'Barony', 'Fief', 'Shire', 'District', 'Kingdom', 'Empire', 'Fort', 'Outpost'],
+      wealthTypes: ['Poor', 'Diminishining', 'Wealthy', 'Bountiful', 'Royalty', 'Agrarian'],
+      technologyTypes: ['Stone', 'Bronze', 'Iron', 'Steel', 'Industrial'],
+      size: {min:1e2, max:1e7}
     };
+
+    var locations = [ location1 ];
 
     Vue.component('graph-coordinate', {
       props: ['x', 'y'],
@@ -347,7 +256,7 @@
       template: `<div class="field">
         {{field}}
         <select @input="$emit('input', $event.target.value)">
-          <option disabled value="">{{field}}</option>
+          <option value="">Select {{field}}</option>
           <option v-for="option in options" :value="option" :selected="value == option">{{option}}</option>
         </select>
       </div>`
@@ -381,27 +290,80 @@
           return (digits / Math.pow(10, 2 - upper % 3)) + suffix;
         }
       }
-    })
+    });
     Vue.component('graph-division', {
       props: ['rows', 'field', 'name', 'count'],
+      data: function(){
+        return {
+          rowToDelete:null
+        };
+      },
       template: `<div class="field">
           <dl>
-            <dt>{{field}}</dt>
+            <dt>{{field}} <button class="btn" @click="addOneMore()">&plus;</button></dt>
             <dd v-for="(row, i) in rows">
               <input type="text" :value="row[name]" @input="updateMe(i, name, $event.target.value)" size="10" />:
-              <input type="text" :value="row[count]" @input="updateMe(i, count, $event.target.value)" size="4" />
+              <input type="text" :value="row[count]" @input="updateMe(i, count, $event.target.value)" size="3" />
+              <button v-bind:class="['btn', rowToDelete==i?'danger':'']" @click="deleteMe(i)">&times;</button>
             </dd>
           </dl>
         </div>`,
         methods: {
           updateMe: function(i,col,val){
             this.rows[i][col] = val;
+          },
+          addOneMore: function(){
+            var obj = {count:0};
+            obj[name] = '';
+            this.rows.push(obj);
+          },
+          deleteMe: function(i){
+            if(this.rowToDelete != i){
+              this.rowToDelete = i;
+              setTimeout(() => {
+                this.rowToDelete = null;
+              }, 2000);
+            }else{
+              this.rowToDelete = null;
+              this.rows.splice(i, 1);
+            }
           }
         }
-    })
+    });
+
+    Vue.component('location-node', {
+      props: ['self', 'choices'],
+      template: `<div class="graphNode">
+        <div class="head location">
+          <span class="locationIcon">&commat;</span>
+          <span class="nodeType">Location</span>
+        </div>
+        <div class="body">
+          <graph-string field="Name" v-model="self.name"></graph-string>
+          <graph-coordinate v-bind="self.coordinate"></graph-coordinate>
+          <graph-decimal v-model="self.minorRadius" field="City Limits" unit="miles" ></graph-decimal>
+          <graph-decimal v-model="self.majorRadius" field="Major Limits" unit="miles" ></graph-decimal>
+          <hr/>
+          <graph-choice v-model="self.type" field="Type" :options="choices.locationTypes"></graph-choice>
+          <graph-choice v-model="self.wealth" field="Wealth" :options="choices.wealthTypes"></graph-choice>
+          <graph-choice v-model="self.technology" field="Tech Level" :options="choices.technologyTypes"></graph-choice>
+          <graph-log-range v-model="self.size" field="Size"  :min="choices.size.min" :max="choices.size.max"></graph-log-range>
+          <graph-division :rows="self.raceDivision" field="Races" name="race" count="count"></graph-division>
+          <graph-division :rows="self.occupationDivision" field="Occupations" name="occupation" count="count"></graph-division>
+          <hr />
+          <div class="field">
+            Connections:
+            <span class="btn">&plus;</span>
+          </div>
+        </div>
+      </div>`,
+    });
     var app = new Vue({
-      el: '#location1',
-      data: { self:location1, choices },
+      el: '#worldApp',
+      data: { 
+        locations,
+        choices 
+      },
       computed: {
         obj: function () {
           JSON.stringify(this.location1)
